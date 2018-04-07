@@ -10,9 +10,10 @@ namespace App\Controller;
 
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-class WelcomeController
+class WelcomeController extends AbstractController
 {
 
     /**
@@ -21,6 +22,8 @@ class WelcomeController
      */
     public function welcome()
     {
-        return new Response('Première page en Symfony 4');
+        return $this->render("welcome.html.twig", ['title' => 'Hi bro']);
     }
+
+
 }
