@@ -3,14 +3,20 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="stylesheet" href="{{ asset('static/vendor/bootstrap/bootstrap4.min.css') }}"/>
-        {% block stylesheets %}{% endblock %}
+
+        {% block stylesheets %}
+            {# Call parent() to append in child blocks #}
+            <link rel="stylesheet" href="{{ asset('static/vendor/bootstrap/bootstrap4.min.css') }}"/>
+        {% endblock %}
     </head>
     <body>
         {% block body %}{% endblock %}
-        <script src="{{ asset('static/vendor/jquery/jquery-3.2.1.slim.min.js') }}"></script>
-        <script src="{{ asset('static/vendor/popper/popper.js') }}"></script>
-        <script src="{{ asset('static/vendor/bootstrap/bootstrap4.min.js') }}"></script>
-        {% block javascripts %}{% endblock %}
+
+        {% block javascripts %}
+            {# Call parent() to append in child blocks #}
+            <script src="{{ asset('static/vendor/jquery/jquery-3.2.1.slim.min.js') }}"></script>
+            <script src="{{ asset('static/vendor/popper/popper.js') }}"></script>
+            <script src="{{ asset('static/vendor/bootstrap/bootstrap4.min.js') }}"></script>
+        {% endblock %}
     </body>
 </html>
