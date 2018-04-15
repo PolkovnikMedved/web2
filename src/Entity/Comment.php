@@ -36,7 +36,8 @@ class Comment
     private $lastModifiedAt;
 
     /**
-     * @ORM\Column(type="integer", nullable=true, name = "fk_author")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
+     * @ORM\JoinColumn(nullable=true, name = "fk_author")
      */
     private $author;
 

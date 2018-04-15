@@ -17,7 +17,7 @@ class WelcomeController extends AbstractController
 {
 
     /**
-     * @Route("/")
+     * @Route("/", name = "welcome")
      * @return Response
      */
     public function welcome()

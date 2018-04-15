@@ -54,7 +54,9 @@ class Product
     private $lastModifiedAt;
 
     /**
-     * @ORM\Column(type="integer", nullable=true, name = "fk_owner")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="products")
+     *
+     * @ORM\JoinColumn(nullable=true, name = "fk_owner")
      */
     private $owner;
 
