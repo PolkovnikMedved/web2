@@ -7,10 +7,33 @@
         {% block stylesheets %}
             {# Call parent() to append in child blocks #}
             <link rel="stylesheet" href="{{ asset('static/vendor/bootstrap/bootstrap4.min.css') }}"/>
+            <link rel="stylesheet" href="{{ asset('static/custom/web2.css') }}"/>
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <!-- HEADER -->
+        <header>
+            <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+                <h5 class="my-0 mr-md-auto font-weight-normal"><a class="no-decor" href="{{ path('welcome') }}">Solodouv</a></h5>
+                <nav class="my-2 my-md-0 mr-md-3">
+                    <a class="p-2 text-dark" href="#">Features</a>
+                    <a class="p-2 text-dark" href="#">Enterprise</a>
+                </nav>
+                <a class="btn btn-outline-primary" href="{{ path('login') }}">Sign in</a>
+            </div>
+        </header>
+
+        <main role="main">
+            <div class="container">
+                {% block body %}{% endblock %}
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <p class="text-center">Solodoukhin Viktor - Projet Web - ICC - 2017-2018</p>
+            </div>
+        </footer>
 
         {% block javascripts %}
             {# Call parent() to append in child blocks #}
