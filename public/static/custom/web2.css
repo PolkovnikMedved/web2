@@ -17,3 +17,8 @@ body {
 a.no-decor{
     text-decoration: none;
 }
+
+.light-bordered{
+    border-left:2px;
+    border-right:2px;
+}

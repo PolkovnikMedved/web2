@@ -1,6 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h3>Welcome to web2 project.</h3>
-<p>{{ title }}</p>
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <h3>Welcome to web2 project.</h3>
+    <p>{{ title }}</p>
+    <p>TODO : Description des services fournis aux utilisateurs connectés et non connectés.</p>
 {% endblock %}

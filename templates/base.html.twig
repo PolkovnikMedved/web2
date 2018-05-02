@@ -16,10 +16,24 @@
             <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
                 <h5 class="my-0 mr-md-auto font-weight-normal"><a class="no-decor" href="{{ path('welcome') }}">Solodouv</a></h5>
                 <nav class="my-2 my-md-0 mr-md-3">
-                    <a class="p-2 text-dark" href="#">Features</a>
-                    <a class="p-2 text-dark" href="#">Enterprise</a>
+                    <a class="p-2 text-dark" href="{{ path('message_index') }}">Chat</a>
+                    <a class="p-2 text-dark" href="{{ path('article_index') }}">Blog</a>
+                    <a class="p-2 text-dark" href="{{ path('product_index') }}">Buy</a>
                 </nav>
-                <a class="btn btn-outline-primary" href="{{ path('login') }}">Sign in</a>
+                {% if not app.user %}
+                    <a type="button" class="btn btn-outline-primary" href="{{ path('login') }}">Sign in</a>
+                    <span>&nbsp;</span>
+                    <a type="button" class="btn btn-outline-primary" href="{{ path('register') }}">Register</a>
+                    <span>&nbsp;</span>
+                {% else %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a type="button" class="btn btn-outline-primary" href="#">Admin</a>
+                        <span>&nbsp;</span>
+                    {% endif %}
+                    <a type="button" class="btn btn-outline-primary" href="{{ path('profile') }}">Profile</a>
+                    <span>&nbsp;</span>
+                    <a type="button" class="btn btn-outline-primary" href="{{ path('logout') }}">Logout</a>
+                {% endif %}
             </div>
         </header>
 
