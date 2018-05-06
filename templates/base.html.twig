@@ -22,7 +22,7 @@
                     <a class="p-2 text-dark" href="{{ path('product_index') }}">Buy</a>
                 </nav>
                 {% if not app.user %}
-                    <a type="button" class="btn btn-outline-primary" href="{{ path('login') }}">Sign in</a>
+                    <a type="button" class="btn btn-outline-primary" href="{{ path('login') }}">Log in</a>
                     <span>&nbsp;</span>
                     <a type="button" class="btn btn-outline-primary" href="{{ path('register') }}">Register</a>
                     <span>&nbsp;</span>
@@ -40,6 +40,15 @@
 
         <main role="main">
             <div class="container">
+
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }}" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
                 {% block body %}{% endblock %}
             </div>
         </main>

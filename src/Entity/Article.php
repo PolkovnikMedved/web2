@@ -120,12 +120,12 @@ class Article
         return $this;
     }
 
-    public function getAuthor(): ?int
+    public function getAuthor(): ?User
     {
         return $this->author;
     }
 
-    public function setAuthor(?int $author): self
+    public function setAuthor(?User $author): self
     {
         $this->author = $author;
 

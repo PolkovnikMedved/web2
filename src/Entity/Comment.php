@@ -97,24 +97,24 @@ class Comment
         return $this;
     }
 
-    public function getAuthor(): ?int
+    public function getAuthor(): ?User
     {
         return $this->author;
     }
 
-    public function setAuthor(?int $author): self
+    public function setAuthor(?User $author): self
     {
         $this->author = $author;
 
         return $this;
     }
 
-    public function getArticle(): ?int
+    public function getArticle(): ?Article
     {
         return $this->article;
     }
 
-    public function setArticle(?int $article): self
+    public function setArticle(?Article $article): self
     {
         $this->article = $article;
 

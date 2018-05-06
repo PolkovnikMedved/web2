@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Form\CommentType;
+use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,6 +17,52 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CommentController extends Controller
 {
+
+    /**
+     * @Route("/{article_id}/new-comment", name="add_article_comment", methods="POST")
+     *
+     * @param Request $request
+     * @param int $article_id
+     * @param ArticleRepository $articleRepository
+     * @return Response
+     */
+    public function commentOnArticle(Request $request, int $article_id, ArticleRepository $articleRepository)
+    {
+        $article = $articleRepository->find($article_id);
+
+        if(!$article){
+            throw $this->createNotFoundException("The article that your are trying to comment does't exist.");
+        }
+
+        $content = $request->request->get('comment-content');
+
+        // Delete spaces
+        $content = trim($content);
+
+        // The comment cant be empty
+        if(!$content || strlen($content) < 3 ){
+
+            $this->addFlash('warning', 'The comment should have at least 3 characters.');
+
+            return $this->redirectToRoute('article_show', array('id' => $article->getId()));
+        }
+
+        // Create the comment from content
+        $comment = new Comment();
+        $comment->setAuthor($this->getUser());
+        $comment->setArticle($article);
+        $comment->setContent($content);
+
+        // Save the comment
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($comment);
+        $em->flush();
+
+        $this->addFlash('success', 'The comment has been added.');
+
+        return $this->redirectToRoute('article_show', ['id' => $article->getId()]);
+    }
+
     /**
      * @Route("/", name="comment_index", methods="GET")
      */

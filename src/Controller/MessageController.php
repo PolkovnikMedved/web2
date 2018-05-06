@@ -38,6 +38,8 @@ class MessageController extends Controller
             $em->persist($message);
             $em->flush();
 
+            $this->addFlash('success', 'The message has been created.');
+
             return $this->redirectToRoute('message_index');
         }
 
