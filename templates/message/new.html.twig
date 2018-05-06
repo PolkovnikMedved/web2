@@ -3,9 +3,20 @@
 {% block title %}New Message{% endblock %}
 
 {% block body %}
-    <h1>Create new Message</h1>
+
+    <div class="row">
+        <div class="col-1">
+            <a href="{{ path('message_index') }}">
+                <i class="fas fa-2x fa-chevron-left"></i>
+            </a>
+        </div>
+
+        <div class="col-11">
+            <h1>Create new Message</h1>
+        </div>
+    </div>
 
     {{ include('message/_form.html.twig') }}
 
-    <a href="{{ path('message_index') }}">back to list</a>
+
 {% endblock %}

@@ -20,7 +20,7 @@ class MessageController extends Controller
      */
     public function index(MessageRepository $messageRepository): Response
     {
-        return $this->render('message/index.html.twig', ['messages' => $messageRepository->findAll()]);
+        return $this->render('message/index.html.twig', ['messages' => $messageRepository->findLastMessages(10)]);
     }
 
     /**
@@ -34,6 +34,7 @@ class MessageController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $message->setAuthor($this->getUser());
             $em->persist($message);
             $em->flush();
 

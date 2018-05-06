@@ -92,12 +92,12 @@ class Message
         return $this;
     }
 
-    public function getFkAuthor(): ?int
+    public function getAuthor(): ?User
     {
         return $this->author;
     }
 
-    public function setFkAuthor(?int $fk_author): self
+    public function setAuthor(?User $fk_author): self
     {
         $this->author = $fk_author;
 

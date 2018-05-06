@@ -19,6 +19,14 @@ class MessageRepository extends ServiceEntityRepository
         parent::__construct($registry, Message::class);
     }
 
+    public function findLastMessages(int $messagesNumber)
+    {
+        return $this->createQueryBuilder('m')
+            ->setMaxResults($messagesNumber)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Message[] Returns an array of Message objects
 //     */
