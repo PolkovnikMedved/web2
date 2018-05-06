@@ -32,7 +32,7 @@ class Product
 
     /**
      * @Assert\NotBlank()
-     * @ORM\Column(type="decimal", precision=0)
+     * @ORM\Column(type="decimal", precision=10, scale=2)
      */
     private $price;
 
@@ -152,24 +152,24 @@ class Product
         return $this;
     }
 
-    public function getOwner(): ?int
+    public function getOwner(): ?User
     {
         return $this->owner;
     }
 
-    public function setOwner(?int $owner): self
+    public function setOwner(?User $owner): self
     {
         $this->owner = $owner;
 
         return $this;
     }
 
-    public function getCategory(): ?int
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    public function setCategory(?int $category): self
+    public function setCategory(?Category $category): self
     {
         $this->category = $category;
 

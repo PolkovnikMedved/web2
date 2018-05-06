@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * @Route("/product")
@@ -25,6 +26,8 @@ class ProductController extends Controller
 
     /**
      * @Route("/new", name="product_new", methods="GET|POST")
+     *
+     * @Security("has_role('ROLE_USER')")
      */
     public function new(Request $request): Response
     {
@@ -33,6 +36,9 @@ class ProductController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $product->setOwner($this->getUser());
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($product);
             $em->flush();
@@ -48,6 +54,7 @@ class ProductController extends Controller
 
     /**
      * @Route("/{id}", name="product_show", methods="GET")
+     *
      */
     public function show(Product $product): Response
     {
@@ -56,6 +63,8 @@ class ProductController extends Controller
 
     /**
      * @Route("/{id}/edit", name="product_edit", methods="GET|POST")
+     *
+     * @Security("has_role('ROLE_USER')")
      */
     public function edit(Request $request, Product $product): Response
     {
@@ -76,6 +85,8 @@ class ProductController extends Controller
 
     /**
      * @Route("/{id}", name="product_delete", methods="DELETE")
+     *
+     * @Security("has_role('ROLE_USER')")
      */
     public function delete(Request $request, Product $product): Response
     {

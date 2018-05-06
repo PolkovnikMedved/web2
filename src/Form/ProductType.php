@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Product;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -21,10 +23,13 @@ class ProductType extends AbstractType
             ->add('description', TextareaType::class)
             ->add('price', MoneyType::class)
             ->add('quantity', IntegerType::class)
-            ->add('createdAt', DateTimeType::class)
-            ->add('lastModifiedAt', DateTimeType::class)
+            //->add('createdAt', DateTimeType::class)
+            //->add('lastModifiedAt', DateTimeType::class)
             //->add('owner')
-            ->add('category', CategoryType::class)
+            ->add('category', EntityType::class, array(
+                'class' => Category::class,
+                'choice_label' => 'name'
+            ))
         ;
     }
 

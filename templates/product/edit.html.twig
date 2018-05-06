@@ -3,11 +3,23 @@
 {% block title %}Edit Product{% endblock %}
 
 {% block body %}
-    <h1>Edit Product</h1>
+
+    <div class="row">
+
+        <div class="col-1">
+            <a href="{{ path('product_index') }}">
+                <i class="fas fa-2x fa-chevron-left"></i>
+            </a>
+        </div>
+
+        <div class="col-11">
+            <h1>Edit Product</h1>
+        </div>
+    </div>
 
     {{ include('product/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('product_index') }}">back to list</a>
-
-    {{ include('product/_delete_form.html.twig') }}
+    <div class="float-left">
+        {{ include('product/_delete_form.html.twig') }}
+    </div>
 {% endblock %}
