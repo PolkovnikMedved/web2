@@ -10,8 +10,68 @@
         </div>
     </div>
 
-    {#
-        TODO show profile
-    #}
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ user.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>First Name</th>
+                        <td>{{ user.firstName }}</td>
+                    </tr>
+                    <tr>
+                        <th>Last Name</th>
+                        <td>{{ user.lastName }}</td>
+                    </tr>
+                    <tr>
+                        <th>Street 1</th>
+                        <td>{{ user.street1 }}</td>
+                    </tr>
+                    <tr>
+                        <th>Street 2</th>
+                        <td>{{ user.street2 }}</td>
+                    </tr>
+                    <tr>
+                        <th>Zip Code</th>
+                        <td>{{ user.zipCode }}</td>
+                    </tr>
+                    <tr>
+                        <th>Locality</th>
+                        <td>{{ user.locality }}</td>
+                    </tr>
+                    <tr>
+                        <th>Birth date</th>
+                        <td>{{ user.birthDate ? user.birthDate|date('d/m/Y') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Username</th>
+                        <td>{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <th>Created At</th>
+                        <td>{{ user.createdAt ? user.createdAt|date('d/m/Y H:s') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Last Updated At</th>
+                        <td>{{ user.lastModifiedAt ? user.lastModifiedAt|date('d/m/Y H:s') : '' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <a class="btn btn-outline-primary" href="{{ path('profile_edit') }}">Edit</a>
+            <a class="btn btn-outline-secondary" href="{{ path('profile_password_edit') }}">Change password</a>
+        </div>
+    </div>
 
 {% endblock %}

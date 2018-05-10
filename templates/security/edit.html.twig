@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile Edit{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-1">
+            <a href="{{ path('profile') }}">
+                <i class="fas fa-2x fa-chevron-left"></i>
+            </a>
+        </div>
+
+        <div class="col-11">
+            <h1 class="text-center">Edit your profile</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="offset-md-2 col-md-8">
+            {{ include('security/_register_form.html.twig') }}
+        </div>
+    </div>
+
+{% endblock %}

@@ -28,7 +28,7 @@
                     <span>&nbsp;</span>
                 {% else %}
                     {% if is_granted('ROLE_ADMIN') %}
-                        <a type="button" class="btn btn-outline-primary" href="#">Admin</a>
+                        <a type="button" class="btn btn-outline-primary" href="{{ path('admin_index') }}">Admin</a>
                         <span>&nbsp;</span>
                     {% endif %}
                     <a type="button" class="btn btn-outline-primary" href="{{ path('profile') }}">Profile</a>
