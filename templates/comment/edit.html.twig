@@ -3,11 +3,20 @@
 {% block title %}Edit Comment{% endblock %}
 
 {% block body %}
-    <h1>Edit Comment</h1>
+
+    <div class="row">
+        <div class="col-1">
+            <a href="{{ path('article_show', {'id': comment.article.id}) }}">
+                <i class="fas fa-2x fa-chevron-left"></i>
+            </a>
+        </div>
+
+        <div class="col-11">
+            <h1>Edit Comment</h1>
+        </div>
+    </div>
 
     {{ include('comment/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('comment_index') }}">back to list</a>
 
     {{ include('comment/_delete_form.html.twig') }}
 {% endblock %}

@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * @Route("/comment")
@@ -96,6 +97,7 @@ class CommentController extends Controller
 
     /**
      * @Route("/{id}", name="comment_show", methods="GET")
+     *
      */
     public function show(Comment $comment): Response
     {
@@ -104,6 +106,8 @@ class CommentController extends Controller
 
     /**
      * @Route("/{id}/edit", name="comment_edit", methods="GET|POST")
+     *
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function edit(Request $request, Comment $comment): Response
     {
@@ -113,7 +117,9 @@ class CommentController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('comment_edit', ['id' => $comment->getId()]);
+            $this->addFlash('success', 'The comment has been edited.');
+
+            return $this->redirectToRoute('article_show', ['id' => $comment->getArticle()->getId()]);
         }
 
         return $this->render('comment/edit.html.twig', [
@@ -124,15 +130,19 @@ class CommentController extends Controller
 
     /**
      * @Route("/{id}", name="comment_delete", methods="DELETE")
+     *
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function delete(Request $request, Comment $comment): Response
     {
+        $articleId = $comment->getArticle()->getId();
+
         if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($comment);
             $em->flush();
         }
 
-        return $this->redirectToRoute('comment_index');
+        return $this->redirectToRoute('article_show', ['id' => $articleId]);
     }
 }

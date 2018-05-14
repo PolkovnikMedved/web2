@@ -15,10 +15,10 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('content', TextType::class)
-            ->add('createdAt', DateTimeType::class)
-            ->add('lastModifiedAt', DateTimeType::class)
+            //->add('createdAt', DateTimeType::class)
+            //->add('lastModifiedAt', DateTimeType::class)
             //->add('author')
-            ->add('article', ArticleType::class)
+            //->add('article', ArticleType::class)
         ;
     }
 

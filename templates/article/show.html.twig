@@ -58,7 +58,15 @@
                             <p>{{ comment.createdAt ? comment.createdAt|date('d/m/Y, H:i') : '' }}</p>
                         </div>
                         <div class="col-10">
-                            <p>{{ comment.content }}</p>
+                            <p>
+                                {{ comment.content }}
+
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('comment_edit', {'id': comment.id}) }}" data-toggle="tooltip" data-placement="top" title="Edit">
+                                        <i class="far fa-edit"></i>
+                                    </a>
+                                {% endif %}
+                            </p>
                         </div>
                     </div>
             {% else %}
