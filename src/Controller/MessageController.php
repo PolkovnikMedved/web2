@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * @Route("/message")
@@ -59,6 +60,8 @@ class MessageController extends Controller
 
     /**
      * @Route("/{id}/edit", name="message_edit", methods="GET|POST")
+     *
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function edit(Request $request, Message $message): Response
     {
@@ -68,7 +71,9 @@ class MessageController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('message_edit', ['id' => $message->getId()]);
+            $this->addFlash('success', 'The message has been edited.');
+
+            return $this->redirectToRoute('message_index');
         }
 
         return $this->render('message/edit.html.twig', [
@@ -79,6 +84,8 @@ class MessageController extends Controller
 
     /**
      * @Route("/{id}", name="message_delete", methods="DELETE")
+     *
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function delete(Request $request, Message $message): Response
     {

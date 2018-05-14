@@ -28,7 +28,11 @@
                             </div>
 
                             <div class="col-10">
-                                <p>{{ message.content }}</p>
+                                <p>{{ message.content }} {% if is_granted('ROLE_ADMIN') %}
+                                        <a href="{{ path('message_edit', {'id' : message.id}) }}" data-toggle="tooltip" data-placement="top" title="Edit">
+                                            <i class="far fa-edit"></i>
+                                        </a>
+                                    {% endif %}</p>
                             </div>
                         </div>
                     </div>
