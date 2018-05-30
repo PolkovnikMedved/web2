@@ -21,6 +21,11 @@
                     <a class="p-2 text-dark" href="{{ path('article_index') }}">Blog</a>
                     <a class="p-2 text-dark" href="{{ path('product_index') }}">Buy</a>
                 </nav>
+                <a href="{{ path('cart') }}" class="btn btn-outline-primary">
+                    <i class="fas fa-shopping-cart"></i>
+                    {{ app.session.get('cart')|length }}
+                </a>
+                <span>&nbsp;</span>
                 {% if not app.user %}
                     <a type="button" class="btn btn-outline-primary" href="{{ path('login') }}">Log in</a>
                     <span>&nbsp;</span>

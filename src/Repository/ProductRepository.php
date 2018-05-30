@@ -19,6 +19,15 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
+    public function findByIdentifiers(array $identifiers)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.id in (:identifiers)')
+            ->setParameter('identifiers', $identifiers)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Product[] Returns an array of Product objects
 //     */

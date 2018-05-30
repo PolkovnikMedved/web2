@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cart{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="offset-md-2 col-md-8">
+            <h1 class="text-center">Cart</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th><i class="fas fa-cog"></i></th>
+                </tr>
+
+                {% for product in products %}
+                <tr>
+                    <td>{{ product[0].title }}</td>
+                    <td>{{ product[0].description|slice(0, 20) }}...</td>
+                    <td>{{ product[0].price }}</td>
+                    <td>{{ product[1] }}</td>
+                    <td>
+                        <a href="{{ path('add_to_cart', {productId: product[0].id}) }}">
+                            <i class="far fa-plus-square text-success"></i>
+                        </a>
+                        &nbsp;
+                        <a href="{{ path('remove_from_cart', {productId: product[0].id}) }}">
+                            <i class="far fa-minus-square text-danger"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <a href="{{ path('product_index') }}" class="btn btn-outline-primary">Continue shopping</a>
+        </div>
+    </div>
+
+{% endblock %}
