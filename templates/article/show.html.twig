@@ -79,10 +79,10 @@
                     <form method="post" action="{{ path('add_article_comment', {'article_id': article.id}) }}">
                         <div class="form-group">
                             <label for="comment-content">Post your comment: </label>
-                            <textarea id="comment-content" name="comment-content" class="form-control"></textarea>
-                            <small class="form-text text-muted">Be sure that you are logged in before sending.</small>
+                            <textarea id="comment-content" name="comment-content" class="form-control" {% if not is_granted('ROLE_USER') %}disabled{% endif %}></textarea>
+                            <small class="form-text text-muted">{% if not is_granted('ROLE_USER') %}Please log in to comment.{% endif %}</small>
                         </div>
-                        <button class="btn btn-outline-success">Send</button>
+                        <button class="btn btn-outline-success" {% if not is_granted('ROLE_USER') %}disabled data-toggle="tooltip" data-placement="top" title="Please log in to comment"{% endif %}>Send</button>
                     </form>
 
                 </div>

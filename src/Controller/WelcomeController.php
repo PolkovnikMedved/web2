@@ -22,7 +22,7 @@ class WelcomeController extends AbstractController
      */
     public function welcome()
     {
-        return $this->render("welcome.html.twig", ['title' => 'Hi bro']);
+        return $this->render("welcome.html.twig", ['student' => 'Solodoukhin Viktor']);
     }
 
 

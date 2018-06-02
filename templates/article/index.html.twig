@@ -40,6 +40,10 @@
             {% endfor %}
         </div>
     </div>
+    {% if not is_granted('ROLE_USER') %}
+        <p class="font-weight-bold">Log in to create an article.</p>
+    {% else %}
+        <a class="btn btn-outline-success" href="{{ path('article_new') }}">Create new</a>
+    {% endif %}
 
-    <a class="btn btn-outline-success" href="{{ path('article_new') }}">Create new</a>
 {% endblock %}
