@@ -23,6 +23,7 @@ class MessageRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('m')
             ->setMaxResults($messagesNumber)
+            ->orderBy('m.createdAt','ASC')
             ->getQuery()
             ->getResult();
     }

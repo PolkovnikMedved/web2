@@ -20,6 +20,12 @@ class Message
 
     /**
      * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 150,
+     *      minMessage = "Your message must be at least {{ limit }} characters long",
+     *      maxMessage = "Your message cannot be longer than {{ limit }} characters"
+     * )
      * @ORM\Column(type="string", length=150)
      */
     private $content;
