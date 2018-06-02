@@ -7,10 +7,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use PhpParser\Node\Scalar\String_;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name = "T_USER")
+ * @UniqueEntity(fields = {"email", "username"})
  */
 class User implements UserInterface, \Serializable
 {
@@ -22,16 +25,37 @@ class User implements UserInterface, \Serializable
     private $id;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 50,
+     *      minMessage = "Your first name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * )
      * @ORM\Column(type="string", length=50, name="last_name")
      */
     private $lastName;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 50,
+     *      minMessage = "Your last name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your last name cannot be longer than {{ limit }} characters"
+     * )
      * @ORM\Column(type="string", length=50, name = "first_name")
      */
     private $firstName;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 100,
+     *      minMessage = "Your street1 must be at least {{ limit }} characters long",
+     *      maxMessage = "Your street1 cannot be longer than {{ limit }} characters"
+     * )
      * @ORM\Column(type="string", length=100, name="street_1")
      */
     private $street1;
@@ -42,31 +66,65 @@ class User implements UserInterface, \Serializable
     private $street2;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 10,
+     *      minMessage = "Your zip code must be at least {{ limit }} characters long",
+     *      maxMessage = "Your zip code cannot be longer than {{ limit }} characters"
+     * )
      * @ORM\Column(type="string", length=10, name = "zip_code")
      */
     private $zipCode;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 100,
+     *      minMessage = "Your locality must be at least {{ limit }} characters long",
+     *      maxMessage = "Your locality cannot be longer than {{ limit }} characters"
+     * )
      * @ORM\Column(type="string", length=100)
      */
     private $locality;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="date", nullable=true, name = "birth_date")
      */
     private $birthDate;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 30,
+     *      minMessage = "Your email must be at least {{ limit }} characters long",
+     *      maxMessage = "Your email cannot be longer than {{ limit }} characters"
+     * )
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )
      * @ORM\Column(type="string", length=50)
      */
     private $email;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=50)
      */
     private $username;
 
     /**
+     * @Assert\NotBlank()
+    *  @Assert\Length(
+     *      min = 6,
+     *      max = 30,
+     *      minMessage = "Your password must be at least {{ limit }} characters long",
+     *      maxMessage = "Your password cannot be longer than {{ limit }} characters"
+     * )
      * @ORM\Column(type="string", length=100)
      */
     private $password;
