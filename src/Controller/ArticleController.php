@@ -26,6 +26,24 @@ class ArticleController extends Controller
     }
 
     /**
+     * @Route("/find", name="find_article", methods="POST")
+     *
+     * @param $request
+     * @param $articleRepository
+     * @return Response
+     */
+    public function findByTitle(Request $request, ArticleRepository $articleRepository) :Response
+    {
+        $title = $request->request->get('title');
+
+        if(!$title){
+            throw $this->createNotFoundException("You should provide an article title for the search.");
+        }
+
+        return $this->render('article/index.html.twig', ['articles' => $articleRepository->findByArticleTitle($title)]);
+    }
+
+    /**
      * @Route("/new", name="article_new", methods="GET|POST")
      *
      * @Security("has_role('ROLE_USER')")

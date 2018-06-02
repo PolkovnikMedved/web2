@@ -5,8 +5,20 @@
 {% block body %}
 
     <div class="row">
-        <div class="col">
-            <h1>Articles</h1>
+        <div class="col-sm-12 col-md-2">
+            <h1 class="text-left">Articles</h1>
+        </div>
+        <div class="col-sm-12 offset-md-6 col-md-4">
+            <form class="form-inline" method="post" action="{{ path('find_article') }}">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="search-picture"><i class="fas fa-search"></i></span>
+                    </div>
+                    <input type="text" class="form-control" name="title" id="title" placeholder="Search by title" aria-describedby="inputGroupPrepend" minlength="2" maxlength="20">
+                    <span>&nbsp;</span>
+                    <button class="btn btn-outline-primary" type="submit" value="find"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -36,7 +48,7 @@
                     </div>
                 </div>
             {% else %}
-                <p>We don't have any articles yet.</p>
+                <p>We don't have any article.</p>
             {% endfor %}
         </div>
     </div>
