@@ -33,7 +33,19 @@
                     <span>&nbsp;</span>
                 {% else %}
                     {% if is_granted('ROLE_ADMIN') %}
-                        <a type="button" class="btn btn-outline-primary" href="{{ path('admin_index') }}">Admin</a>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Admin
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="{{ path('admin_users') }}">Users</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+                        {#
+                            <a type="button" class="btn btn-outline-primary" href="{{ path('admin_index') }}">Admin</a>
+                        #}
                         <span>&nbsp;</span>
                     {% endif %}
                     <a type="button" class="btn btn-outline-primary" href="{{ path('profile') }}">Profile</a>

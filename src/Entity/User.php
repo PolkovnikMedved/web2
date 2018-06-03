@@ -171,7 +171,14 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="author")
      */
-    private $comments;
+    private $createdComments;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="modifiedBy")
+     */
+    private $modifiedComments;
 
     /**
      * @var ArrayCollection
@@ -203,7 +210,8 @@ class User implements UserInterface, \Serializable
         $this->blacklisted = false;
         $this->archivated = false;
         $this->articles = new ArrayCollection();
-        $this->comments = new ArrayCollection();
+        $this->createdComments = new ArrayCollection();
+        $this->modifiedComments = new ArrayCollection();
         $this->messages = new ArrayCollection();
         $this->products = new ArrayCollection();
         $this->createdAt = new DateTime();
@@ -347,12 +355,12 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getBlacklisted(): ?string
+    public function getBlacklisted(): bool
     {
         return $this->blacklisted;
     }
 
-    public function setBlacklisted(string $blacklisted): self
+    public function setBlacklisted(bool $blacklisted): self
     {
         $this->blacklisted = $blacklisted;
 
@@ -426,18 +434,36 @@ class User implements UserInterface, \Serializable
     /**
      * @return ArrayCollection
      */
-    public function getComments(): ArrayCollection
+    public function getCreatedComments(): ArrayCollection
     {
-        return $this->comments;
+        return $this->createdComments;
     }
 
     /**
-     * @param ArrayCollection $comments
+     * @param ArrayCollection $createdComments
      */
-    public function setComments(ArrayCollection $comments): void
+    public function setCreatedComments(ArrayCollection $createdComments)
     {
-        $this->comments = $comments;
+        $this->createdComments = $createdComments;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getModifiedComments(): ArrayCollection
+    {
+        return $this->modifiedComments;
+    }
+
+    /**
+     * @param ArrayCollection $modifiedComments
+     */
+    public function setModifiedComments(ArrayCollection $modifiedComments)
+    {
+        $this->modifiedComments = $modifiedComments;
+    }
+
+
 
     /**
      * @return ArrayCollection

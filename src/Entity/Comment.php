@@ -36,10 +36,16 @@ class Comment
     private $lastModifiedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="createdComments")
      * @ORM\JoinColumn(nullable=true, name = "fk_author")
      */
     private $author;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="modifiedComments")
+     * @ORM\JoinColumn(nullable=true, name = "fk_modification_author")
+     */
+    private $modifiedBy;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Article", inversedBy="comments")
@@ -108,6 +114,24 @@ class Comment
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getModifiedBy() :?User
+    {
+        return $this->modifiedBy;
+    }
+
+    /**
+     * @param mixed $modifiedBy
+     */
+    public function setModifiedBy(User $modifiedBy)
+    {
+        $this->modifiedBy = $modifiedBy;
+    }
+
+
 
     public function getArticle(): ?Article
     {

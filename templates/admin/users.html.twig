@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col">
+            <h1>Users</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Blacklisted</th>
+                    <th>Created at</th>
+                    <th>actions</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for user in users %}
+
+                        <tr>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.firstName }}</td>
+                            <td>{{ user.lastName }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{% if user.blacklisted %}Y{% else %}N{% endif %}</td>
+                            <td>{{ user.createdAt|date('m/d/Y, H:i') }}</td>
+                            <td>
+                                <a href="{{ path('admin_user', {userId: user.id}) }}">
+                                    <i class="far fa-eye"></i>
+                                </a>
+                                <a href="{{ path('admin_user_blacklist', {userId: user.id}) }}" onclick="return confirm('Are you sure you want to change blacklisted property ?');">
+                                    <i class="fas fa-ban text-danger"></i>
+                                </a>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

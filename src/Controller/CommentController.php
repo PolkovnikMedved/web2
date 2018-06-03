@@ -115,6 +115,8 @@ class CommentController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setModifiedBy($this->getUser());
+            $comment->setLastModifiedAt(new \DateTime());
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash('success', 'The comment has been edited.');

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Comment;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -47,4 +48,15 @@ class CommentRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getLastModified(User $user)
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.modifiedBy = :user')
+            ->setParameter('user', $user)
+            ->setMaxResults(5)
+            ->orderBy('c.lastModifiedAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }

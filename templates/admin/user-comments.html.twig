@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User last comments{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-1">
+            <a href="{{ path('admin_users') }}">
+                <i class="fas fa-2x fa-chevron-left"></i>
+            </a>
+        </div>
+
+        <div class="col-11">
+            <h1>User comments</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Content</th>
+                    <th>CreatedAt</th>
+                    <th>LastModifiedAt</th>
+                    <th>Author</th>
+                    <th>Modified by</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for comment in comments %}
+                    <tr>
+                        <td>{{ comment.id }}</td>
+                        <td>{{ comment.content }}</td>
+                        <td>{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>{{ comment.lastModifiedAt ? comment.lastModifiedAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>{{ comment.author.username }}</td>
+                        <td class="font-weight-bold">{{ comment.modifiedBy.username }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

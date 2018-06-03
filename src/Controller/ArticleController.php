@@ -88,7 +88,7 @@ class ArticleController extends Controller
      */
     public function edit(Request $request, Article $article): Response
     {
-        $form = $this->createForm(ArticleCommentsType::class, $article);
+        $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

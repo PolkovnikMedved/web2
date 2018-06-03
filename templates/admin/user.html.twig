@@ -1,0 +1,150 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-1">
+            <a href="{{ path('admin_users') }}">
+                <i class="fas fa-2x fa-chevron-left"></i>
+            </a>
+        </div>
+
+        <div class="col-11">
+            <div class="col">
+                <h3>User <span class="font-weight-bold">{{ user.username }}</span></h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <p class="text-right">Username</p>
+        </div>
+
+        <div class="col-md-10">
+            {{ user.username }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <p class="text-right">First Name</p>
+        </div>
+
+        <div class="col-md-10">
+            {{ user.firstName }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <p class="text-right">Last Name</p>
+        </div>
+
+        <div class="col-md-10">
+            {{ user.lastName }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <p class="text-right">Email</p>
+        </div>
+
+        <div class="col-md-10">
+            {{ user.email }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <p class="text-right">Blacklisted</p>
+        </div>
+
+        <div class="col-md-10">
+            {% if user.blacklisted %}Y{% else %}N{% endif %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <p class="text-right">Birth Date</p>
+        </div>
+
+        <div class="col-md-10">
+            {{ user.birthDate|date('d/m/Y') }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <p class="text-right">Roles</p>
+        </div>
+
+        <div class="col-md-10">
+            {% for role in user.roles %}
+                {{ role }}&nbsp;
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <p class="text-right">Street 1</p>
+        </div>
+
+        <div class="col-md-10">
+            {{ user.street1 }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <p class="text-right">Street 2</p>
+        </div>
+
+        <div class="col-md-10">
+            {{ user.street2 }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <p class="text-right">Zip code</p>
+        </div>
+
+        <div class="col-md-10">
+            {{ user.zipCode }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <p class="text-right">Locality</p>
+        </div>
+
+        <div class="col-md-10">
+            {{ user.locality }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <p class="text-right">Created At</p>
+        </div>
+
+        <div class="col-md-10">
+            {{ user.createdAt|date('d/m/Y, H:i') }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <p>Last user comments : <a class="btn btn-outline-primary" href="{{ path('admin_user_comments', {userId: user.id}) }}">Find</a></p>
+        </div>
+    </div>
+
+
+{% endblock %}
