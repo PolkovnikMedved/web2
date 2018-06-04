@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Carts{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col">
+            <h1>User carts</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                       <th>Cart Number</th>
+                       <th>Total Price</th>
+                       <th>Date</th>
+                       <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for cart in carts %}
+
+                <tr>
+                    <td>{{ cart.cartNumber }}</td>
+                    <td>{{ cart.sum }}</td>
+                    <td>{{ cart.createdAt|date('d/m/Y, H:i') }}</td>
+                    <td>
+                        <a href="{{ path('user_cart', {cartNumber:cart.cartNumber}) }}">
+                            <i class="far fa-eye"></i>
+                        </a>
+                    </td>
+                </tr>
+
+                {% else %}
+                    <tr><td colspan="4">You don't have any purchase.</td></tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

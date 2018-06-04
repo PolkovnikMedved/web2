@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Carts{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-1">
+            <a href="{{ path('user_carts') }}">
+                <i class="fas fa-2x fa-chevron-left"></i>
+            </a>
+        </div>
+
+        <div class="col-11">
+            <div class="col">
+                <h1>User cart</h1>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>Cart Number</td>
+                        <td>Product title</td>
+                        <td>Product Quantity</td>
+                        <td>Product Price</td>
+                        <td>Purchase Date</td>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for c in cart %}
+
+                    <tr>
+                        <td>{{ c.cartNumber }}</td>
+                        <td>{{ c.product.title }}</td>
+                        <td>{{ c.productQuantity }}</td>
+                        <td>{{ c.totalPrice }}</td>
+                        <td>{{ c.createdAt|date('d/m/Y, H:i') }}</td>
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% dump(cart) %}
+
+{% endblock %}

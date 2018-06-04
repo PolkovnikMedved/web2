@@ -195,6 +195,13 @@ class User implements UserInterface, \Serializable
     private $products;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Cart", mappedBy="customer")
+     */
+    private $carts;
+
+    /**
      * @var array
      *
      * @ORM\Column(name="roles", type="array", nullable=false)
@@ -215,6 +222,7 @@ class User implements UserInterface, \Serializable
         $this->messages = new ArrayCollection();
         $this->products = new ArrayCollection();
         $this->createdAt = new DateTime();
+        $this->carts = new ArrayCollection();
     }
 
 

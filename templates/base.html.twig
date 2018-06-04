@@ -39,8 +39,6 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="{{ path('admin_users') }}">Users</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </div>
                         {#
@@ -48,7 +46,15 @@
                         #}
                         <span>&nbsp;</span>
                     {% endif %}
-                    <a type="button" class="btn btn-outline-primary" href="{{ path('profile') }}">Profile</a>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ app.user.username }}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="{{ path('profile') }}">Profile</a>
+                            <a class="dropdown-item" href="{{ path('user_carts') }}">Purchases</a>
+                        </div>
+                    </div>
                     <span>&nbsp;</span>
                     <a type="button" class="btn btn-outline-primary" href="{{ path('logout') }}">Logout</a>
                 {% endif %}

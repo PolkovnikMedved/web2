@@ -21,23 +21,31 @@
                     <th><i class="fas fa-cog"></i></th>
                 </tr>
 
+                {% set total = 0.0 %}
                 {% for product in products %}
-                <tr>
-                    <td>{{ product[0].title }}</td>
-                    <td>{{ product[0].description|slice(0, 20) }}...</td>
-                    <td>{{ product[0].price }}</td>
-                    <td>{{ product[1] }}</td>
-                    <td>
-                        <a href="{{ path('add_to_cart', {productId: product[0].id}) }}">
-                            <i class="far fa-plus-square text-success"></i>
-                        </a>
-                        &nbsp;
-                        <a href="{{ path('remove_from_cart', {productId: product[0].id}) }}">
-                            <i class="far fa-minus-square text-danger"></i>
-                        </a>
-                    </td>
-                </tr>
+                    {% set total = total + (product[0].price * product[1]) %}
+
+                    <tr>
+                        <td>{{ product[0].title }}</td>
+                        <td>{{ product[0].description|slice(0, 20) }}...</td>
+                        <td class="text-right">{{ product[0].price }} €</td>
+                        <td>{{ product[1] }}</td>
+                        <td>
+                            <a href="{{ path('add_to_cart', {productId: product[0].id}) }}">
+                                <i class="far fa-plus-square text-success"></i>
+                            </a>
+                            &nbsp;
+                            <a href="{{ path('remove_from_cart', {productId: product[0].id}) }}">
+                                <i class="far fa-minus-square text-danger"></i>
+                            </a>
+                        </td>
+                    </tr>
                 {% endfor %}
+
+                <tr>
+                    <td colspan="3" class="text-right">Total = <span class="font-weight-bold">{{ total }} €</span></td>
+                    <td colspan="2"></td>
+                </tr>
 
             </table>
         </div>
@@ -46,6 +54,7 @@
     <div class="row">
         <div class="col">
             <a href="{{ path('product_index') }}" class="btn btn-outline-primary">Continue shopping</a>
+            <a href="{{ path('save_cart') }}" class="btn btn-outline-success">Buy</a>
         </div>
     </div>
 

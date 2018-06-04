@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -38,12 +39,6 @@ class Product
 
     /**
      * @Assert\NotBlank()
-     * @ORM\Column(type="integer")
-     */
-    private $quantity;
-
-    /**
-     * @Assert\NotBlank()
      * @ORM\Column(type="datetime", name = "created_at")
      */
     private $createdAt;
@@ -67,11 +62,19 @@ class Product
     private $category;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Cart", mappedBy="product")
+     */
+    private $carts;
+
+    /**
      * Product constructor.
      */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->carts = new ArrayCollection();
     }
 
 
@@ -112,18 +115,6 @@ class Product
     public function setPrice($price): self
     {
         $this->price = $price;
-
-        return $this;
-    }
-
-    public function getQuantity(): ?int
-    {
-        return $this->quantity;
-    }
-
-    public function setQuantity(int $quantity): self
-    {
-        $this->quantity = $quantity;
 
         return $this;
     }

@@ -22,7 +22,7 @@ class ProductType extends AbstractType
             ->add('title', TextType::class)
             ->add('description', TextareaType::class)
             ->add('price', MoneyType::class)
-            ->add('quantity', IntegerType::class)
+            //->add('quantity', IntegerType::class)
             //->add('createdAt', DateTimeType::class)
             //->add('lastModifiedAt', DateTimeType::class)
             //->add('owner')
